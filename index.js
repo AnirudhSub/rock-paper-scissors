@@ -1,5 +1,3 @@
-console.log("Hello World!")
-
 function getComputerChoice() {
   var choice = Math.floor(Math.random()*3)
   if(choice == 0) return "rock"
@@ -30,9 +28,9 @@ function playRound(playerSelection , computerSelection) {
 
 
 const btn = document.querySelector('#btn');
-btn.onclick = game;
+btn.onclick = startGame;
 
-function game(){
+function startGame(){
   var playerWins = 0 , computerWins = 0 
   while( playerWins != 5 && computerWins !=5){
     var playerSelection = getPlayerSelection()
