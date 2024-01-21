@@ -3,7 +3,7 @@ var playerSelection;
 var computerScore = 0;
 var playerScore =0;
 
-const score = document.getElementById("ScoreLive");
+const score = document.getElementById("scoreLive");
 const test = document.getElementById("test");
 const results = document.getElementById("results");
 const humanFloat = document.getElementById("humanFloat");
@@ -63,7 +63,10 @@ function playRound  ( playerSelection, computerSelection) {
     };
     if (playerSelection === computerSelection) {
         results.innerText = `its a tie!\nYou both picked ${computerSelection}` 
-        results.style.textAlign = 'center'};
+        results.style.textAlign = 'center'
+    };
+
+        results.style.color = `aliceblue`;
         checkWinner()
 };
 
@@ -102,9 +105,9 @@ function update(){
     if( playerSelection === 'rock') playerImg.src = "imgs/rock.png"
     else if( playerSelection === 'paper') playerImg.src = "imgs/paper.png"
     else if( playerSelection === 'scissors') playerImg.src = "imgs/scissors.png"
-    if(computerSelection === 'rock') playerImg.src = "imgs/rock.png"
-    else if ( computerSelection === 'paper') playerImg.src = "imgs/paper.png"
-    else if ( computerSelection === 'scissors') playerImg.src = "imgs/scissors.png"
+    if(computerSelection === 'rock') computerImg.src = "imgs/rock.png"
+    else if ( computerSelection === 'paper') computerImg.src = "imgs/paper.png"
+    else if ( computerSelection === 'scissors') computerImg.src = "imgs/scissors.png"
 }
 
 
@@ -113,7 +116,7 @@ function checkWinner(){
     if (playerScore < 5 && computerScore < 5){
         results.style.textAlign = 'center'
     if (playerScore === 1 || computerScore === 1) {
-        results.style.color = '#1C3144'
+        results.style.color = 'aliceblue'
     }
     }else{
         declareWinner();
@@ -122,15 +125,16 @@ function checkWinner(){
         //results.style.color = '#1C3144'
     }  
 }
+
 function declareWinner(){
     if (playerScore===5){
         results.style.textAlign = 'center'
         results.innerText = "You won the game!!!\nPlay another?";
-        results.style.color = '#8ed081'
+        results.style.color = 'green'
 
     } else if (computerScore===5){
         results.style.textAlign = 'center'
         results.innerText = "Sorry, it seems that you lost the game...\nPlay another?";
-        results.style.color = '#fb6376'
+        results.style.color = 'red'
     }
 }
