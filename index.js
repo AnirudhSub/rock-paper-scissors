@@ -1,59 +1,140 @@
-console.log("Hello World!")
+var computerSelection;
+var playerSelection;
+var computerScore = 0;
+var playerScore =0;
 
-function getComputerChoice() {
-  var choice = Math.floor(Math.random()*3)
-  if(choice == 0) return "rock"
-  else if(choice == 1) return "paper"
-  else return "scissor"
-}
+const score = document.getElementById("scoreLive");
+const test = document.getElementById("test");
+const results = document.getElementById("results");
+const humanFloat = document.getElementById("humanFloat");
+const computerFloat = document.getElementById("computerFloat");
 
-function getPlayerSelection(){
-  var ip = prompt("Input rock , paper or scissors :").toLowerCase()
-  if( ip == "rock" || ip == "paper" || ip =="scissors")
-    return ip
-  else{
-    console.log("Please enter 'rock' , 'paper' or 'scissors' " )
-    return getPlayerSelection()
-  }
-}
-
-function playRound(playerSelection , computerSelection) {
-    if((playerSelection == "rock" && computerSelection =="scissor") 
-      || (playerSelection =="scissor" && computerSelection =="paper" ) 
-      || (playerSelection == "paper" && computerSelection =="rock"))
-      return "Win" //
-    else if (playerSelection == computerSelection)
-      return "Tie"
-    else
-      return "Lose" //
-}
-
-
-const btn = document.querySelector('#btn');
-btn.onclick = game;
-
-function game(){
-  var playerWins = 0 , computerWins = 0 
-  while( playerWins != 5 && computerWins !=5){
-    var playerSelection = getPlayerSelection()
-    var computerSelection = getComputerChoice()
-    var result = playRound(playerSelection , computerSelection)
-    if(result == "Tie"){
-      console.log("Tie happened , reroll")
+function computerPlay() {
+    const randomNumber = Math.floor(Math.random() * 3);
+    switch(randomNumber){
+        case 0 :
+            return 'paper';
+            break;
+        case 1 :
+            return 'rock';
+            break;
+        case 2 :
+            return 'scissors';
+            break;
+        default:
+            break;
     }
-    if(result=="Win"){
-      playerWins = playerWins + 1
-      console.log("You won! you chose " + playerSelection + " and the computer chose " + computerSelection + " !")
+};
+
+computerSelection = computerPlay();
+
+function playRound  ( playerSelection, computerSelection) {
+    if( playerSelection === 'paper'){
+        if (computerSelection === 'rock'){
+            playerScore +=1;
+            results.innerText = `You won the round!\n Paper beats ${computerSelection}`
+            checkWinner();
+        }
+        else if (computerSelection === 'scissors'){
+            computerScore +=1;
+            results.innerText = `Computer won the round!\n Scissors beats ${playerSelection}`
+            checkWinner();
+        }
     }
-    else{
-      computerWins = computerWins + 1
-      console.log("You lost ! you chose " + playerSelection + "and the computer chose " + computerSelection+ " !")
-    }     
-  }
-  if(playerWins == 5 ) console.log("Congratulations! you won five rounds!")
-  else console.log("Tough luck! Try again ")
-  return 0
+    if (playerSelection === 'scissors') {
+        if (computerSelection === 'rock') {
+            computerScore +=1;
+            results.innerText = `Computer won the round!\n Rock beats ${playerSelection}`
+            checkWinner();}
+        else if (computerSelection === 'paper') {
+            playerScore +=1;
+            results.innerText = `You won the round!\n Scissors beats ${computerSelection}`
+            checkWinner()} 
+    };
+    if (playerSelection === 'rock') {
+        if (computerSelection === 'paper') {
+            computerScore +=1;
+            results.innerText = `Computer won the round!\nPaper beats ${playerSelection}`
+            checkWinner() }
+        else if (computerSelection === 'scissors') {
+            playerScore +=1;
+            results.innerText = `You won the round!\nRock beats ${computerSelection}`;
+            checkWinner()}
+    };
+    if (playerSelection === computerSelection) {
+        results.innerText = `its a tie!\nYou both picked ${computerSelection}` 
+        results.style.textAlign = 'center'
+    };
+
+        results.style.color = `aliceblue`;
+        checkWinner()
+};
+
+var rock = document.getElementById('rock');
+rock.addEventListener('click', function() {
+    computerSelection = computerPlay()
+    playerSelection = 'rock'
+    console.log(playerSelection)
+    console.log(computerSelection)
+    playRound(playerSelection, computerSelection);
+    update()
+    humanFloat()
+    })
+
+var paper = document.getElementById('paper');
+paper.addEventListener('click', function() {
+    computerSelection = computerPlay()
+    playerSelection = 'paper'
+    playRound(playerSelection, computerSelection);
+    update()
+})
+
+var scissors = document.getElementById('scissors');
+scissors.addEventListener('click', function() {
+    computerSelection = computerPlay()
+    playerSelection = 'scissors'
+    update()
+    playRound(playerSelection, computerSelection);
+})
+
+function update(){
+    score.textContent = `[ ${playerScore} : ${computerScore} ]`;
+    humanFloat.style.visibility = 'visible';
+    computerFloat.style.visibility = 'visible';
+
+    if( playerSelection === 'rock') playerImg.src = "imgs/rock.png"
+    else if( playerSelection === 'paper') playerImg.src = "imgs/paper.png"
+    else if( playerSelection === 'scissors') playerImg.src = "imgs/scissors.png"
+    if(computerSelection === 'rock') computerImg.src = "imgs/rock.png"
+    else if ( computerSelection === 'paper') computerImg.src = "imgs/paper.png"
+    else if ( computerSelection === 'scissors') computerImg.src = "imgs/scissors.png"
 }
 
 
 
+function checkWinner(){
+    if (playerScore < 5 && computerScore < 5){
+        results.style.textAlign = 'center'
+    if (playerScore === 1 || computerScore === 1) {
+        results.style.color = 'aliceblue'
+    }
+    }else{
+        declareWinner();
+        playerScore = 0;
+        computerScore = 0;
+        //results.style.color = '#1C3144'
+    }  
+}
+
+function declareWinner(){
+    if (playerScore===5){
+        results.style.textAlign = 'center'
+        results.innerText = "You won the game!!!\nPlay another?";
+        results.style.color = 'green'
+
+    } else if (computerScore===5){
+        results.style.textAlign = 'center'
+        results.innerText = "Sorry, it seems that you lost the game...\nPlay another?";
+        results.style.color = 'red'
+    }
+}

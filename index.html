@@ -1,12 +1,56 @@
 <!DOCTYPE html>
-<HTML>
+<HTML lang="en">
     <head>
-        <script src="./index.js"></script>
+        <title>RPS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <p>Hello !!!!</p>
-        <button id="btn"> Play Game</button>
+        <header>
+            <h1>Rock Paper Scissors</h1>
+            <h2>First one to 5 points wins</h2>
+        </header>
+        <section class="score">
+            <h3 id="test">Score</h3>
+            <h2 id="scoreLive">[ 0 : 0 ]</h2>
+        </section>
+        <main class="results">
+            <div>
+                <div id="humanFloat">
+                    <h5>Human</h5>
+                </div>
+                <img id='playerImg' src="imgs/person.png" alt="player">
+            </div>
+            <div id="result1">
+                <h2 id="results">Select options below to start</h2>
+            </div>
+            <div class="computerPlayer">
+                <div id="computerFloat">
+                    <h5>Computer</h5>
+                </div>
+                <img id='computerImg' src="imgs/computer.png" alt="computer">  
+            </div>
+        </main>
+        <section class="options">
+            <div class="selectionimages">
+                <div>
+                    <h4 id="rockWord">Rock</h4>
+                    <img id="rock" src="imgs/rock.png" alt="rock">
+                </div>
+                <div>
+                    <h4 id="paperWord">Paper</h4>
+                    <img id="paper" src="imgs/paper.png" alt="paper">
+                </div>
+                <div>
+                    <h4 id="scissorWord">Scissors</h4>
+                    <img id="scissors" src="imgs/scissors.png" alt="scissor">
+                </div>
+            </div>
+        </section>
+        <footer>
+            <h6>Made for the Odin Project</h6>
+        </footer>
     </body>
+    <script src="./index.js"></script>
 </HTML>
